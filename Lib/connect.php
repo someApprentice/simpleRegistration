@@ -20,6 +20,4 @@ function getPdo(){
 
     return $pdo;
 }
-
-$connect = getPdo();
 ?>

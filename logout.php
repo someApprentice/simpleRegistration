@@ -4,6 +4,12 @@ session_start();
 
 if(isLoggedIn()) {
     session_destroy();
+
+    $location = $_GET['go'];
+
+    header("Location: /" . $location);
+    die();
+} else {
+    header("Location: /index.php");
 }
-header("Location: /index.php");
 ?>

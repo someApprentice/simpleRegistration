@@ -1,8 +1,8 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Config/connect.php';
+require_once __DIR__ . '\connect.php';
 
 function getUserByLogin($login) {
-    global $connect;
+    $connect = getPdo();
 
     $query = $connect->prepare("SELECT * FROM users WHERE login=:login");
     $query->bindValue(':login', $login, PDO::PARAM_STR);
@@ -13,7 +13,7 @@ function getUserByLogin($login) {
 }
 
 function  createUser($login, $hash, $salt) {
-    global $connect;
+    $connect = getPdo();
 
     $insert = $connect->prepare("INSERT INTO users (id, login, password, salt) VALUES (NULL, :login, :hash, :salt)");
     $insert->execute(array(

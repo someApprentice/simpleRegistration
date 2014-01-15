@@ -14,7 +14,7 @@ function hashPassword($password, $salt) {
 }
 
 function generateSalt() {
-    $salt = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.*-'), 0, 44);
+    $salt = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.*-^%$#@'), 0, 44);
     return $salt;
 }
 

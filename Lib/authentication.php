@@ -1,9 +1,8 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Lib/database.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Lib/functions.php';
+require_once __DIR__ . '\database.php';
+require_once __DIR__ . '\functions.php';
 
 function signIn($login, $password) {
-    session_start();
     $array = getUserByLogin($login);
 
     if (!$array) {
@@ -23,22 +22,4 @@ function signIn($login, $password) {
 
     return true;
 }
-
-if(isset($_POST['signIn'])) {
-    $login = isset($_POST['login']) ? strval($_POST['login']) : '';
-    $password = isset($_POST['password']) ? strval($_POST['password']) : '';
-
-    $login = trim($login);
-    $password = trim($password);
-
-    if(signIn($login, $password)) {
-        $location = $_GET['go'];
-
-        header("Location: /" . $location);
-        die();
-    }
-
-}
-
-
 ?>

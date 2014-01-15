@@ -1,8 +1,8 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Lib/database.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Lib/functions.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Lib/validations.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Lib/authentication.php';
+require_once __DIR__ . '\database.php';
+require_once __DIR__ . '\functions.php';
+require_once __DIR__ . '\validations.php';
+require_once __DIR__ . '\authentication.php';
 
 function signUp ($login, $password, &$errors = array()) {
     if (getUserByLogin($login)) {
@@ -40,32 +40,5 @@ function signUp ($login, $password, &$errors = array()) {
     }
 
     return true;
-}
-
-if(isset($_POST['signUp'])) {
-    $login = isset($_POST['login']) ? strval($_POST['login']) : '';
-    $password = isset($_POST['password']) ? strval($_POST['password']) : '';
-    $retryPassword = isset($_POST['retryPassword']) ? strval($_POST['retryPassword']) : '';
-
-    $login = trim($login);
-    $password = trim($password);
-    $retryPassword = trim($retryPassword);
-
-    $errors = array(
-        'login' => "",
-        'password' => "",
-        'retryPassword' => ""
-    );
-
-    if($retryPassword != $password) {
-        $errors['retryPassword'] = "Passwords do not match";
-    }
-
-    if (signUp($login, $password,  $errors)) {
-        $location = $_GET['go'];
-
-        header("Location: /" . $location);
-        die();
-    }
 }
 ?>
