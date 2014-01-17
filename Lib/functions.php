@@ -28,4 +28,13 @@ function retryPasswordIsMatch($password, $retryPassword) {
     return $error;
 }
 
+function redirection() {
+    if(isset($_GET['go'])) {
+        $location = $_GET['go'];
+
+        if (!preg_match('/^(http(s)?:)?(\\\\\\\\|\\/\\/).+$/', $location, $matches)) {
+            header("Location: " . $location);
+        }
+    }
+}
 ?>

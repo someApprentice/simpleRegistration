@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Config/config.php';
+require __DIR__ . '/../Config/config.php';
 
 function getConfig($key) {
     global $config;

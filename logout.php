@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Lib/functions.php';
+require_once __DIR__ . '/Lib/functions.php';
 session_start();
 
 if(isLoggedIn()) {

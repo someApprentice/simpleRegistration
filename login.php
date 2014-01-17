@@ -1,5 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Lib/authentication.php';
+require_once __DIR__ . '/Lib/authentication.php';
+require_once __DIR__ . '/Lib/registration.php';
 
 $login = '';
 $password = '';
@@ -23,10 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         session_start();
 
-        if (signIn($login, $password, $errors)) {
-            $location = $_GET['go'];
-
-            header("Location: /" . $location);
+        if (signIn($login, $password)) {
+            redirection();
             die();
         }
     }
