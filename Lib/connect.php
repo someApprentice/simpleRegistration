@@ -16,6 +16,8 @@ function getPdo(){
             getConfig('db_user'),
             getConfig('db_password')
         );
+
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     return $pdo;

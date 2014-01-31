@@ -2,6 +2,10 @@
 require_once __DIR__ . '/Lib/registration.php';
 require_once __DIR__ . '/Lib/functions.php';
 
+$login = "";
+$password = "";
+$retryPassword = "";
+
 $errors = array(
     'login' => "",
     'password' => "",

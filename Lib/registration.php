@@ -21,7 +21,7 @@ function signUp ($login, $password, &$errors = array()) {
 
     //$errors = array_filter($errors);
 
-    if (!empty(array_filter($errors))) {
+    if (count(array_filter($errors))) {
         //include $_SERVER['DOCUMENT_ROOT'] . '/Templates/form.php';
 
         return false;
