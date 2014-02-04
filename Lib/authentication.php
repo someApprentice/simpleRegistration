@@ -1,8 +1,9 @@
 <?php
 require_once __DIR__ . '/database.php';
 require_once __DIR__ . '/functions.php';
+require_once __DIR__ . '/cookies.php';
 
-function signIn($login, $password) {
+function signIn($login, $password, $remember) {
     $array = getUserByLogin($login);
 
     if (!$array) {
@@ -16,9 +17,14 @@ function signIn($login, $password) {
         return false;
     }
 
-    $_SESSION['id'] = $array['id'];
-    $_SESSION['login'] = $array['login'];
-    $_SESSION['password'] = $array['password'];
+    if($remember) {
+        createCookies($array['id'], $array['login'], $array['password'], $array['token']);
+    } else {
+        $_SESSION['id'] = $array['id'];
+        $_SESSION['login'] = $array['login'];
+        $_SESSION['password'] = $array['password'];
+        $_SESSION['token'] = $array['token'];
+    }
 
     return true;
 }

@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/Lib/authentication.php';
 require_once __DIR__ . '/Lib/registration.php';
+require_once __DIR__ . '/Lib/cookies.php';
 
 $login = '';
 $password = '';
@@ -22,9 +23,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif ('' === $password) {
         $errors['password'] = "Empty password field";
     } else {
-        session_start();
 
-        if (signIn($login, $password)) {
+        if(isset($_POST['rememberMe'])) {
+            $remember = true;
+        } else {
+            session_start();
+            $remember = false;
+        }
+
+        if (signIn($login, $password, $remember)) {
             redirection();
             die();
         } else {

@@ -30,9 +30,11 @@ function signUp ($login, $password, &$errors = array()) {
     $salt = generateSalt();
     $hash = hashPassword($password, $salt);
 
-    createUser($login, $hash, $salt);
+    $token = generateToken();
 
-    if (!signIn($login, $password)) {
+    createUser($login, $hash, $salt, $token);
+
+    if (!signIn($login, $password, $remember = false)) {
         $errors['login'] = 'Unable to login, all broke.';
 
         return false;

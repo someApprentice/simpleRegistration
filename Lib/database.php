@@ -12,14 +12,15 @@ function getUserByLogin($login) {
     return $result;
 }
 
-function  createUser($login, $hash, $salt) {
+function  createUser($login, $hash, $salt, $token) {
     $connect = getPdo();
 
-    $insert = $connect->prepare("INSERT INTO users (id, login, password, salt) VALUES (NULL, :login, :hash, :salt)");
+    $insert = $connect->prepare("INSERT INTO users (id, login, password, salt, token) VALUES (NULL, :login, :hash, :salt, :token)");
     $insert->execute(array(
         ':login' => $login,
         ':hash' => $hash,
-        ':salt' => $salt
+        ':salt' => $salt,
+        ':token' => $token
     ));
 
     return $insert;
