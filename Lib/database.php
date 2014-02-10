@@ -1,6 +1,17 @@
 <?php
 require_once __DIR__ . '/connect.php';
 
+function getUserById($id) {
+    $connect = getPdo();
+
+    $user = $connect->prepare("SELECT * FROM users WHERE id=:id");
+    $user->bindValue(':id', $id, PDO::PARAM_STR);
+    $user->execute();
+    $result = $user->fetch(PDO::FETCH_ASSOC);
+
+    return $result;
+}
+
 function getUserByLogin($login) {
     $connect = getPdo();
 

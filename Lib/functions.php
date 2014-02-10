@@ -1,6 +1,24 @@
 <?php
+require_once __DIR__ . '/database.php';
+
 function isLoggedIn() {
-    if((isset($_SESSION['id'])) || (isset($_COOKIE['id']))) {
+    if((!isset($_SESSION['id'])) || (!isset($_COOKIE['id']))){
+        session_start();
+    }
+
+    if(isset($_SESSION['id'])) {
+        return true;
+    } elseif(isset($_COOKIE['id'])) {
+        $user = getUserById($_COOKIE['id']);
+
+        if($user['token'] == $_COOKIE['token']) {
+            $_SESSION['id'] = $user['id'];
+            $_SESSION['login'] = $user['login'];
+            $_SESSION['token'] = $user['token'];
+        } else {
+            return false;
+        }
+
         return true;
     } else {
         return false;
@@ -14,7 +32,7 @@ function hashPassword($password, $salt) {
 }
 
 function generateSalt() {
-    $salt = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.*-^%$#@!?%&%_=+<>[]{}'), 0, 44);
+    $salt = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.*-^%$#@!?%&%_=+<>[]{}0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.*-^%$#@!?%&%_=+<>[]{}'), 0, 44);
     return $salt;
 }
 
@@ -28,7 +46,7 @@ function retryPasswordIsMatch($password, $retryPassword) {
     return $error;
 }
 
-function redirection() {
+function redirect() {
     if(isset($_GET['go'])) {
         $location = $_GET['go'];
 

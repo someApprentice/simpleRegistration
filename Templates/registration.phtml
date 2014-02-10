@@ -1,9 +1,5 @@
 <?php
 require_once __DIR__ . '/../Lib/functions.php';
-
-if((!isset($_SESSION)) || (!isset($_COOKIE))) {
-    session_start();
-}
 ?>
 
 <!DOCTYPE html>
@@ -15,23 +11,23 @@ if((!isset($_SESSION)) || (!isset($_COOKIE))) {
 </head>
 <body>
 <?php if(isLoggedIn()): ?>
-    You are signed!
+    You are signed!  Back to <a href="index.php">home</a>?
 <?php else : ?>
 <div id="wrapper">
     <form method="post" name="registrationForm" action="registration.php?go=/index.php">
-        Login: <input type="text" name="login" value="<?= htmlspecialchars($login, ENT_QUOTES)?>">
+        <label for="passwordLoginInput">Login:</label> <input type="text" name="login" value="<?= htmlspecialchars($login, ENT_QUOTES)?>" id="passwordLoginInput">
         <?php if($errors['login'] != "") : ?>
             <span style='color:red;'><?= $errors['login'] ?></span>
         <?php endif; ?>
         <br>
 
-        Password: <input type="password" name="password" value="">
+        <label for="passwordPasswordInput">Password:</label> <input type="password" name="password" value="" id="passwordPasswordInput">
         <?php if ($errors['password'] != "") : ?>
             <span style='color:red;'><?= $errors['password'] ?></span>
         <?php endif; ?>
         <br>
 
-        Retry Password: <input type="password" name="retryPassword" value="">
+        <label for="retryPasswordInput">Retry Password:</label> <input type="password" name="retryPassword" value="" id="retryPasswordInput">
         <?php if ($errors['retryPassword'] != "") : ?>
             <span style='color:red;'><?= $errors['retryPassword'] ?></span>
         <?php endif; ?>

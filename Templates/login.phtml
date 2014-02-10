@@ -1,9 +1,5 @@
 <?php
 require_once __DIR__ . '/../Lib/functions.php';
-
-if((!isset($_SESSION)) || (!isset($_COOKIE))){
-    session_start();
-}
 ?>
 
 <!DOCTYPE html>
@@ -15,22 +11,22 @@ if((!isset($_SESSION)) || (!isset($_COOKIE))){
 </head>
 <body>
 <?php if(isLoggedIn()): ?>
-    You are already signed!
+    You are already signed! Back to <a href="index.php">home</a>?
 <?php else : ?>
     <div id="wrapper">
         <form method="post" name="registrationForm" action="login.php?go=/index.php">
-            Login: <input type="text" name="login" value="<?= htmlspecialchars($login, ENT_QUOTES)?>">
+            <label for="loginLoginInput">Login:</label> <input type="text" name="login" value="<?= htmlspecialchars($login, ENT_QUOTES)?>" id="loginLoginInput">
             <?php if($errors['login'] != "") : ?>
                 <span style='color:red;'><?= $errors['login'] ?></span>
             <?php endif; ?>
             <br>
 
-            Password: <input type="password" name="password" value="">
+            <label for="passwordLoginInput">Password:</label> <input type="password" name="password" value="" id="passwordLoginInput">
             <?php if ($errors['password'] != "") : ?>
                 <span style='color:red;'><?= $errors['password'] ?></span>
             <?php endif; ?>
             <br>
-
+            <input type="checkbox" name="rememberMe" id="loginRememberMe"> <label for="loginRememberMe">Remember me.</label><br>
             <input type="submit" name="signIn" value="Submit!">
         </form>
     </div>

@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     session_start();
     if (signUp($login, $password,  $errors)) {
-        redirection();
+        redirect();
         die();
     }
 }

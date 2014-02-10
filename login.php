@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         if (signIn($login, $password, $remember)) {
-            redirection();
+            redirect();
             die();
         } else {
             $errors['login'] = "Incorrect username or password.";

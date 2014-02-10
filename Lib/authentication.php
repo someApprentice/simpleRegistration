@@ -18,13 +18,12 @@ function signIn($login, $password, $remember) {
     }
 
     if($remember) {
-        createCookies($array['id'], $array['login'], $array['password'], $array['token']);
-    } else {
-        $_SESSION['id'] = $array['id'];
-        $_SESSION['login'] = $array['login'];
-        $_SESSION['password'] = $array['password'];
-        $_SESSION['token'] = $array['token'];
+        createCookies($array['id'], $array['login'], $array['token']);
     }
+
+    $_SESSION['id'] = $array['id'];
+    $_SESSION['login'] = $array['login'];
+    $_SESSION['token'] = $array['token'];
 
     return true;
 }
